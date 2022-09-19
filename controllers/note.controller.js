@@ -46,7 +46,22 @@ const deleteNote = asyncHandler((req,res)=>{
         })
      })
 })
-
+ const getNote = asyncHandler(async(req,res)=>{
+    notes.find({userId : req.params.id})
+    .then((ele)=>{
+        res.status(200).send({
+            success:true,
+            message:'Blogs are as Follow',
+            data:ele, 
+        })
+    })
+    .catch((err)=>{
+        res.status(400).send({
+            success:false,
+            message: 'Caught some error'+err,
+        })
+    })
+ })
 const getAllNote  = asyncHandler(async (req,res) =>{
     notes.find()
     .then((note)=>{
@@ -84,4 +99,4 @@ const updateNote = asyncHandler((req,res)=>{
 })
 
 
-module.exports = {addNotes,deleteNote,getAllNote,updateNote}
+module.exports = {addNotes,deleteNote,getAllNote,updateNote,getNote}
