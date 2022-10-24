@@ -47,7 +47,23 @@ const deleteNote = asyncHandler((req,res)=>{
      })
 })
  const getNote = asyncHandler(async(req,res)=>{
-    notes.find({userId : req.params.id})
+    notes.find({_id : req.params.id})
+    .then((ele)=>{
+        res.status(200).send({
+            success:true,
+            message:'Blogs are as Follow',
+            data:ele, 
+        })
+    })
+    .catch((err)=>{
+        res.status(400).send({
+            success:false,
+            message: 'Caught some error'+err,
+        })
+    })
+ })
+ const getuserNote = asyncHandler(async(req,res)=>{
+    notes.find({userId: req.params.id})
     .then((ele)=>{
         res.status(200).send({
             success:true,
@@ -76,27 +92,28 @@ const getAllNote  = asyncHandler(async (req,res) =>{
 
 const updateNote = asyncHandler((req,res)=>{
     const noteId = req.params.id;
-    const data = req.body;
-    notes.updateOne(
-        {id : noteId},
-        {$set : data}
-    )
-    .then((result)=>{
-        res.status(200).send({
-            success : true,
-            message : 'Blog is updated successfully',
+    const { title, mainContent, image, category } = req.body;
+    const myQuery = {id:noteId};
+    const newvalues = {$set :{title:title, mainContent:mainContent, image:image, category:category}}
 
-        })
-    })
-    .catch((err)=>{
+    notes
+      .updateOne(myQuery,newvalues)
+      .then(() => {
+        res.status(200).send({
+          success: true,
+          message: "Blog is updated successfully",
+        });
+      })
+      .catch((err) => {
+        console.log(err);
         res.status(400).send({
-            success:false,
-            message: 'Caught some error',
-        })
-    })
+          success: false,
+          message: "Caught some error",
+        });
+      });
 
 
 })
 
 
-module.exports = {addNotes,deleteNote,getAllNote,updateNote,getNote}
+module.exports = {addNotes,deleteNote,getAllNote,updateNote,getNote,getuserNote}

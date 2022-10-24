@@ -6,6 +6,8 @@ const userSchema   = new Schema({
     email : {type:String},  
     password : {type:String},
     address : {type:String},
+    image : {type:String,
+    default:"https://xsgames.co/randomusers/assets/images/favicon.png"},
     mobileNumber : {type:String},
     likes : [{ type : String}],
     notes : [{ type : String}]

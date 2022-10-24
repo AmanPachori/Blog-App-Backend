@@ -50,7 +50,21 @@ const Signup = asyncHandler(async(req,res) =>{
     }
 
 })
+const update = asyncHandler(async(req,res)=>{
+    const id = req.params.id;
+    const {username,address} = req.body;
+    const myQuery = {_id:id};
+    const newvalues = {$set :{username:username,address:address}}
+    User.updateOne(myQuery, newvalues)
+    .then(()=>{
+        res.status(200).json({
+            success:true,
+            message: "User data updated Successfully",
+        })
+    })
+    .catch((err) => res.status(400).json("Error :"))
 
+})
 const Signin = asyncHandler(async (req,res) =>{
     const {email,password} = req.body;
     const user = await User.findOne({email});
@@ -73,7 +87,7 @@ const Signin = asyncHandler(async (req,res) =>{
 })
 
 const getUser = asyncHandler(async (req,res)=>{
-    let user = await User.find();
+    let user = await User.find({_id:req.params.id});
     
     res.status(200).send({
         success:true,
@@ -86,4 +100,4 @@ const GenerateToken = (id) => {
     return token;
 };
 
-module.exports ={Signup,Signin,getUser}
+module.exports ={Signup,Signin,getUser,update}
