@@ -12,7 +12,7 @@ const noteSchema = new Schema({
     category  : [{
         type:String,
     }],
-    createdOn : { type : Date , default: Date.now}
+    createdOn : { type : Date , default: Date.now.toLocaleString(undefined, {timeZone: 'Asia/Kolkata'})}
     
 })
 
