@@ -6,13 +6,14 @@ const noteSchema = new Schema({
     mainContent : {type:String},
     image: {type:String},
     userId : {type:String},
+    username: {type:String},    
     likes :[{
         type:String,
     }],
     category  : [{
         type:String,
     }],
-    createdOn : { type : Date , default: Date.now.toLocaleString(undefined, {timeZone: 'Asia/Kolkata'})}
+    createdOn : { type : Date , default: Date.now}
     
 })
 
