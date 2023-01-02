@@ -6,7 +6,6 @@ const noteSchema = new Schema({
     mainContent : {type:String},
     image: {type:String},
     userId : {type:String},
-    username: {type:String},    
     likes :[{
         type:String,
     }],

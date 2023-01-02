@@ -88,7 +88,6 @@ const Signin = asyncHandler(async (req,res) =>{
 
 const getUser = asyncHandler(async (req,res)=>{
     let user = await User.find({_id:req.params.id});
-    
     res.status(200).send({
         success:true,
         data:user,

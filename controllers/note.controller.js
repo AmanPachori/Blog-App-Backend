@@ -3,14 +3,13 @@ const asyncHandler = require('express-async-handler');
 
 
 const addNotes = asyncHandler((req,res)=>{
-    const { title,mainContent,image,userId,username,category} = req.body;
+    const { title,mainContent,image,userId,category} = req.body;
 
     const note = new notes({
         title,
         mainContent,
         image,
         userId,
-        username,
         category
     });
 
