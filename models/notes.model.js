@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const moment = require('moment-timezone');
+const date = moment.tz(Date.now(), "Asia/Kolkata").format('DD-MM-YYYY HH:mm')
 
 const noteSchema = new Schema({
     title : {type:String},
@@ -12,7 +14,7 @@ const noteSchema = new Schema({
     category  : [{
         type:String,
     }],
-    createdOn : { type : Date , default: Date.now}
+    createdOn : { type : String , default: date}
     
 })
 
