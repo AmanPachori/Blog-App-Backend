@@ -91,30 +91,30 @@ const getAllNote  = asyncHandler(async (req,res) =>{
     })
 });
 
-const updateNote = asyncHandler((req,res)=>{
-    const noteId = req.params.id;
-    const { title, mainContent, image, category } = req.body;
-    const myQuery = {id:noteId};
-    const newvalues = {$set :{title:title, mainContent:mainContent, image:image, category:category}}
+const updateNote = asyncHandler((req, res) => {
+  const noteId = req.params.id;
+  const { title, mainContent, image } = req.body;
+  const myQuery = { _id: noteId };
+  const newvalues = {
+    $set: { title: title, mainContent: mainContent, image: image },
+  };
 
-    notes
-      .updateOne(myQuery,newvalues)
-      .then(() => {
-        res.status(200).send({
-          success: true,
-          message: "Blog is updated successfully",
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-        res.status(400).send({
-          success: false,
-          message: "Caught some error",
-        });
+  notes
+    .updateOne(myQuery, newvalues)
+    .then(() => {
+      res.status(200).send({
+        success: true,
+        message: "Blog is updated successfully",
       });
-
-
-})
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(400).send({
+        success: false,
+        message: "Caught some error",
+      });
+    });
+});
 
 
 module.exports = {addNotes,deleteNote,getAllNote,updateNote,getNote,getuserNote}
