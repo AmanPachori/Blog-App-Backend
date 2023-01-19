@@ -18,6 +18,9 @@ app.listen(PORT,()=>{
 })
 app.use('/user',user);
 app.use('/notes',notes);
+app.get("/", (req, res) => {
+    res.send("Express on Vercel");
+  });
 mongoose.connect(URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
