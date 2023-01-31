@@ -18,7 +18,6 @@ const VerifyToken = asyncHandler(async (req, res, next) => {
       req.user = await User.findById(decoded.id).select("-password");
 
       next();
-
     } catch (err) {
       console.log(err);
       res.status(400);
