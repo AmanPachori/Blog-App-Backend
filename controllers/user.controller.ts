@@ -1,4 +1,5 @@
-const jwt = require("jsonwebtoken");
+import { RequestHandler } from "express";
+import jwt from "jsonwebtoken";
 const bcrypt = require("bcrypt");
 const User = require("../models/user.model");
 const asyncHandler = require("express-async-handler");
@@ -43,20 +44,25 @@ const Signup = asyncHandler(async (req, res) => {
       .catch((err) => res.status(400).json("Error :" + err));
   }
 });
-const update = asyncHandler(async (req, res) => {
+const update: RequestHandler = asyncHandler(async (req, res) => {
   const id = req.params.id;
   const { username, address } = req.body;
   const myQuery = { _id: id };
   const newvalues = { $set: { username: username, address: address } };
-  User.updateOne(myQuery, newvalues)
-    .then(() => {
-      res.status(200).json({
-        success: true,
-        message: "User data updated Successfully",
-      });
-    })
-    .catch((err) => res.status(400).json("Error :"));
+
+  // Assuming you're using Mongoose to work with MongoDB
+  // You can use async/await here as well
+  try {
+    await User.updateOne(myQuery, newvalues);
+    res.status(200).json({
+      success: true,
+      message: "User data updated Successfully",
+    });
+  } catch (error) {
+    res.status(400).json("Error: " + error.message);
+  }
 });
+
 const Signin = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });

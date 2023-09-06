@@ -1,4 +1,5 @@
-const router = require("express").Router();
+import router from './routes'
+
 const {
   addNotes,
   deleteNote,
