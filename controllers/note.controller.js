@@ -1,4 +1,5 @@
 const notes = require("../models/notes.model");
+const User = require("../models/user.model");
 const asyncHandler = require("express-async-handler");
 
 const addNotes = asyncHandler((req, res) => {
@@ -83,10 +84,13 @@ const getuserNote = asyncHandler(async (req, res) => {
 });
 const getAllNote = asyncHandler(async (req, res) => {
   notes.find().then((note) => {
-    res.status(200).send({
-      success: true,
-      message: "Blogs Dispalyed succesfully",
-      data: note,
+    User.findOne({ _id: note.userId }).then((user) => {
+      res.status(200).send({
+        success: true,
+        message: "Blogs Dispalyed succesfully",
+        userData: user,
+        data: note,
+      });
     });
   });
 });
