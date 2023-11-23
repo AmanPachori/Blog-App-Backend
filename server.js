@@ -7,6 +7,7 @@ const URI = process.env.ATLAS_URL;
 const app = express();
 const user = require("./routes/user");
 const notes = require("./routes/notes");
+const tiic = require("./routes/tiic");
 const bodyParser = require("body-parser");
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
@@ -18,6 +19,7 @@ app.listen(PORT, () => {
 });
 app.use("/user", user);
 app.use("/notes", notes);
+app.use("/tiic", tiic);
 app.get("/", (req, res) => {
   res.send("Express on Vercel");
 });
