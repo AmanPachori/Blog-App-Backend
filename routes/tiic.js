@@ -6,7 +6,7 @@ const {
 } = require("../controllers/tiic.controller");
 
 router.get("/get", getAllData);
-router.get("/getdata", getData);
+router.post("/getdata", getData);
 router.post("/add", addData);
 
 module.exports = router;
