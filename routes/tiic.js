@@ -1,7 +1,12 @@
 const router = require("express").Router();
-const { getAllData, addData } = require("../controllers/tiic.controller");
+const {
+  getAllData,
+  addData,
+  getData,
+} = require("../controllers/tiic.controller");
 
 router.get("/get", getAllData);
+router.get("/getdata", getData);
 router.post("/add", addData);
 
 module.exports = router;
